@@ -1,3 +1,4 @@
+using MongoDB.Bson;
 using MongoDB.Driver;
 using PixelHub.Api.Models;
 
@@ -20,9 +21,14 @@ public class MongoGameCatalog : IGameCatalog
 
     public async Task<List<Game>> GetTopRatedAsync(int count) =>
         await _jeux.Find(_ => true)
-                   .SortByDescending(g => g.Note)
+                   .SortByDescending(g => g.Note).ThenBy(g => g.Titre)
                    .Limit(count)
                    .ToListAsync();
+
+    public async Task<Game?> GetByIdAsync(string id) =>
+        ObjectId.TryParse(id, out var oid)
+            ? await _jeux.Find(g => g.Id == oid).FirstOrDefaultAsync()
+            : null;
 
     public async Task<List<GenreStats>> GetStatsByGenreAsync()
     {

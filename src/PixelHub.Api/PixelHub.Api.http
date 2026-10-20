@@ -31,3 +31,46 @@ Accept: application/json
 ### Séance 2 — agrégation : note moyenne par genre
 GET {{host}}/games/stats
 Accept: application/json
+
+### Bonus B1 — casse du genre (attendu : [])
+GET {{host}}/games/genre/fps
+
+### Bonus B1 — genre inexistant
+GET {{host}}/games/genre/Roguelike
+
+### Bonus B1 — top 0 (attendu : 400)
+GET {{host}}/games/top/0
+
+### Bonus B6 — un jeu par _id (remplacer par un _id réel)
+GET {{host}}/games/6ac391854f4117735b11208b
+
+### Bonus B6 — id mal formé (attendu : 404)
+GET {{host}}/games/abc
+
+### Bonus B6 — id valide mais inexistant (attendu : 404)
+GET {{host}}/games/000000000000000000000000
+
+
+### Séance 3 — classement : ajouter des points
+POST {{host}}/leaderboard/Nova/points/4500
+
+### Séance 3 — classement : top 5
+GET {{host}}/leaderboard/top/5
+
+### Séance 3 — classement : rang d'un joueur
+GET {{host}}/leaderboard/rank/Nova
+
+### Séance 3 — cache : /games/timed (appeler plusieurs fois)
+GET {{host}}/games/timed
+
+### Séance 3 — file de matchmaking
+POST {{host}}/matchmaking/Nova
+
+###
+POST {{host}}/matchmaking/match
+
+### Séance 3 — joueurs en ligne
+POST {{host}}/online/Nova
+
+###
+GET {{host}}/online/count

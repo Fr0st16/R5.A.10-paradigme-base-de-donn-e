@@ -10,4 +10,5 @@ public interface IGameCatalog
     Task<List<Game>> GetByGenreAsync(string genre);
     Task<List<Game>> GetTopRatedAsync(int count);
     Task<List<GenreStats>> GetStatsByGenreAsync();
+    Task<Game?> GetByIdAsync(string id);
 }
